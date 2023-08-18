@@ -1711,7 +1711,6 @@
         "灰": "no",
         "解": "ont",
         "卒": "wig",
-
     }
 
     const one = {
@@ -2734,6 +2733,10 @@
         "征": ["服", "途", "战", "兵", "地"],
     }
 
+    const funcs = {
+        "now": function(){return (new Date()).toISOString();}
+    }
+
 
     const root = {}
 
@@ -2861,6 +2864,7 @@
                 o = e.key
             }
         }
+
         //处理中文问号
         if (o && e.shiftKey) {
             shiftKey = true
