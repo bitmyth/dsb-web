@@ -2300,7 +2300,7 @@
         "沟": ["通"],
         "页": ["面"],
         "酗": ["酒"],
-	"并": ["且", "未", "发"],
+        "并": ["且", "未", "发"],
         "摆": ["脱"],
         "防": ["止", "范"],
         "范": ["围"],
@@ -2473,7 +2473,7 @@
         "都": ["是", "市", "要"],
         "充": ["分", "足", "当"],
         "布": ["局", "满"],
-	"允": ["许"],
+        "允": ["许"],
         "哥": ["们"],
         "和": ["谐"],
         "筷": ["子"],
@@ -2734,7 +2734,9 @@
     }
 
     const funcs = {
-        "now": function(){return (new Date()).toISOString();}
+        "now": function () { return (new Date()).toISOString(); },
+        "date": function () { return (new Date()).toISOString().substring(0, 10); },
+        "year": function () { return (new Date()).toISOString().substring(0, 4); }
     }
 
 
@@ -2805,12 +2807,16 @@
     let candidates = [];
     let o = "";
 
-    function refreshStrokesBar() {
+    function input() {
         var strokesArr = []
         strokes.forEach(function (v) {
             strokesArr.push(v[0])
         });
-        strokesBar.innerText = strokesArr.join("")
+        return strokesArr.join("")
+    }
+
+    function refreshStrokesBar() {
+        strokesBar.innerText = input()
     }
 
     function active(e) {
@@ -2929,6 +2935,15 @@
             strokes.push([e.key, state])
             refreshStrokesBar()
             console.log("strokes", strokes)
+        }
+
+        if (o == "" && (strokes.length > 0)) {
+            let str = input()
+            for (const k in funcs) {
+                if (k == str) {
+                    o = funcs[k]()
+                }
+            }
         }
 
         if (o) {
