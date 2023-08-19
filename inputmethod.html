@@ -2734,7 +2734,14 @@
     }
 
     const funcs = {
-        "now": function () { return (new Date()).toISOString(); },
+        "now": function () {
+            let options = {
+                weekday: "long", year: "numeric", month: "short",
+                day: "numeric", hour: "2-digit", minute: "2-digit"
+            };
+
+            return (new Date()).toLocaleTimeString("zh-CN", options);
+        },
         "date": function () { return (new Date()).toISOString().substring(0, 10); },
         "year": function () { return (new Date()).toISOString().substring(0, 4); }
     }
